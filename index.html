@@ -1,28 +1,40 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Sofia!</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="components/navbar.js"></script>
-    <script src="components/floating-elements.js"></script>
-    <script src="components/footer.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-        body {
-            font-family: 'Quicksand', sans-serif;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Sofia!</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Quicksand', sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    .animate-fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
 </head>
 <body class="bg-gradient-to-b from-pink-200 via-pink-100 to-white">
-    <custom-navbar></custom-navbar>
-    <floating-elements></floating-elements>
+  <custom-navbar></custom-navbar>
+  <floating-elements></floating-elements>
 
     <!-- Hero Section -->
     <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
@@ -137,9 +149,9 @@
 
     <custom-footer></custom-footer>
 
-    <script src="script.js"></script>
-    <script>
-        feather.replace();
-    </script>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+  <script> feather.replace(); </script>
 </body>
 </html>
