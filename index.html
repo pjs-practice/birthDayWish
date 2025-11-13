@@ -183,7 +183,24 @@ section {
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
   <script src="https://raw.githubusercontent.com/pjs-practice/birthDayWish/refs/heads/main/components/navbar.js"></script>
   <script src="https://raw.githubusercontent.com/pjs-practice/birthDayWish/refs/heads/main/components/floating-elements.js"></script>
-  <script src="https://raw.githubusercontent.com/pjs-practice/birthDayWish/refs/heads/main/components/footer.js"></script>
+  <script src="components/footer.js">
+    class CustomFooter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <footer class="bg-gradient-to-r from-pink-200 via-pink-100 to-pink-200 py-8 text-center text-pink-700 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto">
+          <p class="text-lg mb-2">Made with 💖 and endless sparkle for <strong>Sofia</strong></p>
+          <p class="text-sm opacity-70">© ${new Date().getFullYear()} Your Friend ✨</p>
+        </div>
+        <div class="absolute right-6 top-4 text-pink-400 animate-float">
+          <i data-feather="heart"></i>
+        </div>
+      </footer>
+    `;
+  }
+}
+customElements.define('custom-footer', CustomFooter);
+  </script>
   <script src="script.js">
     // --- BALLOON POP SECTION ---
 document.querySelectorAll('.balloon').forEach(balloon => {
