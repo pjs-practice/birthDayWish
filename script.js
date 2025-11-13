@@ -5,23 +5,19 @@ document.querySelectorAll('.balloon').forEach(balloon => {
     const wishDisplay = document.getElementById('wish-display');
     const textElement = wishDisplay.querySelector('p');
 
-    // Animate pop
     this.style.transition = "transform 0.3s ease, opacity 0.3s ease";
     this.style.transform = "scale(1.3)";
     this.style.opacity = "0";
 
-    // Play a pop sound
     const popSound = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_2a8cb3fbb4.mp3");
     popSound.play();
 
     setTimeout(() => this.remove(), 300);
 
-    // Display the hidden wish
     wishDisplay.classList.remove('hidden');
     textElement.textContent = wishText;
     textElement.classList.add("animate-fade-in-up");
 
-    // Trigger confetti
     confetti({
       particleCount: 80,
       spread: 80,
@@ -34,6 +30,24 @@ document.querySelectorAll('.balloon').forEach(balloon => {
 // --- CELEBRATE BUTTON ---
 document.querySelector('button').addEventListener('click', () => {
   window.scrollTo({
+    top: document.querySelector('#balloons').offsetTop,
+    behavior: 'smooth'
+  });
+});
+
+// --- FINAL CONFETTI BUTTON ---
+document.getElementById('confetti-btn').addEventListener('click', () => {
+  const duration = 3 * 1000;
+  const animationEnd = Date.now() + duration;
+  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+  const interval = setInterval(() => {
+    const timeLeft = animationEnd - Date.now();
+    if (timeLeft <= 0) return clearInterval(interval);
+    const particleCount = 50 * (timeLeft / duration);
+    confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
+  }, 250);
+});
     top: document.querySelector('section:nth-of-type(2)').offsetTop,
     behavior: 'smooth'
   });
