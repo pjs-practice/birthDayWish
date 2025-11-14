@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Sofia!</title>
+  <title>Happy Birthday Kakoli!</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/feather-icons"></script>
@@ -53,6 +53,34 @@ button:hover {
 section {
   scroll-margin-top: 80px;
 }
+/* 🌠 SHOOTING STAR ANIMATION */
+.shooting-star {
+  position: fixed;
+  top: -20px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px white, 0 0 20px #ffd6f5, 0 0 40px #ff9ad9;
+  animation: shoot 1.5s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate(-50vw, -20vh) scale(0.6);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(50vw, 80vh) scale(0.2);
+    opacity: 0;
+  }
+}
+
   </style>
 </head>
 
@@ -67,10 +95,10 @@ section {
     </div>
     <div class="relative z-10 max-w-4xl mx-auto">
       <h1 class="text-5xl md:text-7xl font-bold text-pink-600 mb-6 animate-bounce">
-        🎀 Happy Birthday, Future Dr. Sofia! 🎂
+        🎀 Happy Birthday, Future Dr. Kakoli! 🎂
       </h1>
       <p class="text-xl md:text-2xl text-pink-700 mb-8">
-        Step into your dreamy pink world filled with sparkles, laughter, and endless smiles 💕
+        Step into your dreamy world filled with sparkles, laughter, and endless smiles 💕
       </p>
       <button class="bg-pink-400 text-white rounded-full px-8 py-3 hover:bg-pink-500 shadow-lg transition-all transform hover:scale-105">
         Let's Celebrate! ✨
@@ -105,9 +133,9 @@ section {
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-4xl font-bold text-pink-600 mb-12">A Little Message Just for You 💌</h2>
       <div class="space-y-6 text-lg text-pink-800">
-        <p class="animate-fade-in-up">Dearest Sofia,</p>
+        <p class="animate-fade-in-up">Dearest Kakoli,</p>
         <p class="animate-fade-in-up delay-500">I wanted to create something that sparkles just like your smile — filled with joy, colors, and magic.</p>
-        <p class="animate-fade-in-up delay-1000">You're growing into a beautiful soul, destined to heal and inspire others. 💖</p>
+        <p class="animate-fade-in-up delay-1000">Grow into a beautiful soul, destined to heal and inspire others. 💖</p>
         <p class="animate-fade-in-up delay-1500">Never stop chasing the stars; the world needs your light!</p>
       </div>
     </div>
@@ -156,7 +184,7 @@ section {
       </div>
       <h2 class="text-4xl font-bold text-pink-700 mb-8">👩‍⚕️ The Kind Healer Within You</h2>
       <p class="text-2xl text-pink-800 mb-12">
-        Sofia, one day soon, your gentle hands and kind heart will bring healing to others. 🌷
+        Kakoli, one day soon, your gentle hands and kind heart will bring healing to others. 🌷
       </p>
       <div class="flex justify-center">
         <div class="bg-white/80 rounded-full p-6 shadow-lg">
@@ -169,12 +197,12 @@ section {
   <!-- Final Section -->
   <section id="final" class="min-h-screen flex flex-col justify-center items-center px-4 py-16 bg-gradient-to-b from-pink-200 to-pink-300">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-5xl font-bold text-white mb-8">💫 Happy Birthday, Sofia! 💖</h2>
-      <p class="text-2xl text-white mb-12">May your days be as pink, playful, and precious as your heart. Never stop smiling, never stop dreaming!</p>
+      <h2 class="text-5xl font-bold text-white mb-8">💫 Happy Birthday, Kakoli! 💖</h2>
+      <p class="text-2xl text-white mb-12">May your days be as playful, and precious as your heart. Never stop smiling, never stop dreaming!</p>
       <button id="confetti-btn" class="bg-gradient-to-r from-pink-400 to-pink-500 text-white px-8 py-4 rounded-full hover:scale-105 transition-all shadow-xl text-xl font-bold">
         Make a Magical Wish 🌟
       </button>
-      <p class="mt-16 text-white/80 animate-fade-in-slow">With love & sparkles — from your distant friend 💌</p>
+      <p class="mt-16 text-white/80 animate-fade-in-slow">With love & sparkles — from your distant friend | Parag 💌</p>
     </div>
   </section>
 
@@ -193,7 +221,7 @@ class CustomNavbar extends HTMLElement {
     this.innerHTML = `
       <nav class="fixed top-0 w-full bg-white/70 backdrop-blur-md shadow-md z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 class="text-pink-600 font-bold text-xl">🎀 Sofia's Birthday</h1>
+          <h1 class="text-pink-600 font-bold text-xl">🎀 Kakoli's Birthday</h1>
           <ul class="flex space-x-6 text-pink-700 font-medium">
             <li><a href="#top" class="hover:text-pink-500">Home</a></li>
             <li><a href="#balloons" class="hover:text-pink-500">Balloons</a></li>
@@ -240,8 +268,8 @@ class CustomFooter extends HTMLElement {
     this.innerHTML = `
       <footer class="bg-gradient-to-r from-pink-200 via-pink-100 to-pink-200 py-8 text-center text-pink-700 relative overflow-hidden">
         <div class="max-w-4xl mx-auto">
-          <p class="text-lg mb-2">Made with 💖 and endless sparkle for <strong>Sofia</strong></p>
-          <p class="text-sm opacity-70">© ${new Date().getFullYear()} Your Friend ✨</p>
+          <p class="text-lg mb-2">Made with 💖 and endless sparkle for <strong>Kakoli</strong></p>
+          <p class="text-sm opacity-70">© ${new Date().getFullYear()} Your Friend | Parag ✨</p>
         </div>
         <div class="absolute right-6 top-4 text-pink-400 animate-float">
           <i data-feather="heart"></i>
@@ -252,38 +280,23 @@ class CustomFooter extends HTMLElement {
 }
 customElements.define('custom-footer', CustomFooter);
 
+/* — AUDIO SETUP — */
+const bgm = new Audio("https://www.orangefreesounds.com/wp-content/uploads/2016/08/Happy-birthday-instrumental.mp3");
+bgm.volume = 0.2;          // low volume soothing background
+bgm.loop = true;
 
+const balloonPopSfx = new Audio("https://www.orangefreesounds.com/wp-content/uploads/2014/12/Balloon-pop.mp3");
+balloonPopSfx.volume = 0.6;
 
-/* -------------------------------------------
-   BALLOON POP SECTION
-------------------------------------------- */
-document.querySelectorAll('.balloon').forEach(balloon => {
-  balloon.addEventListener('click', function () {
-    const wishText = this.getAttribute('data-wish');
-    const wishDisplay = document.getElementById('wish-display');
-    const textElement = wishDisplay.querySelector('p');
+// new sound effects
+const successChimeSfx = new Audio("https://www.orangefreesounds.com/wp-content/uploads/2025/08/Success-chime-sound-effect.mp3");  // from source
+successChimeSfx.volume = 0.5;
 
-    this.style.transition = "transform 0.3s ease, opacity 0.3s ease";
-    this.style.transform = "scale(1.3)";
-    this.style.opacity = "0";
+const partyPopperSfx = new Audio("https://sounddino.com/en/effects/party-popper/download/file/party-popper-sfx.mp3");  // from source
+partyPopperSfx.volume = 0.6;
 
-    const popSound = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_2a8cb3fbb4.mp3");
-    popSound.play();
-
-    setTimeout(() => this.remove(), 300);
-
-    wishDisplay.classList.remove('hidden');
-    textElement.textContent = wishText;
-    textElement.classList.add("animate-fade-in-up");
-
-    confetti({
-      particleCount: 80,
-      spread: 80,
-      origin: { y: 0.7 },
-      colors: ['#f472b6', '#ec4899', '#f9a8d4', '#fbcfe8']
-    });
-  });
-});
+const birthdayHornSfx = new Audio("https://freesoundslibrary.com/funny-birthday-horn.mp3");  // from source
+birthdayHornSfx.volume = 0.6;
 
 /* -------------------------------------------
    CELEBRATE BUTTON
@@ -299,6 +312,9 @@ document.querySelector('button').addEventListener('click', () => {
    FINAL CONFETTI BUTTON
 ------------------------------------------- */
 document.getElementById('confetti-btn').addEventListener('click', () => {
+  partyPopperSfx.currentTime = 0;
+  partyPopperSfx.play();
+
   const duration = 3 * 1000;
   const animationEnd = Date.now() + duration;
   const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
@@ -363,9 +379,9 @@ cupcakeGame.style.background = 'linear-gradient(to bottom, #fff0f5, #ffe4f0)';
 let basket = document.createElement('div');
 basket.textContent = '🧺';
 basket.style.position = 'absolute';
-basket.style.bottom = '10px';
+basket.style.bottom = '8px';
 basket.style.left = '50%';
-basket.style.fontSize = '2rem';
+basket.style.fontSize = '2.5rem';
 basket.style.transform = 'translateX(-50%)';
 cupcakeGame.appendChild(basket);
 
@@ -404,6 +420,8 @@ function startCupcakeCatch() {
         cupcakeRect.left + 15 >= basketRect.left &&
         cupcakeRect.left <= basketRect.right
       ) {
+        successChimeSfx.currentTime = 0;
+        successChimeSfx.play();
         cupcakeScore++;
         confetti({
           particleCount: 15,
@@ -427,7 +445,7 @@ function startCupcakeCatch() {
   // Stop game after 15 seconds
   setTimeout(() => {
     clearInterval(gameInterval);
-    alert(`🧁 You caught ${cupcakeScore} cupcakes, Sofia! Sweet job! 🍰`);
+    alert(`🧁 You caught ${cupcakeScore} cupcakes, Kakoli! Sweet job! 🍰`);
   }, 15000);
 }
 
@@ -451,9 +469,11 @@ cupcakeGame.addEventListener('touchmove', e => {
 cupcakeGame.addEventListener('click', startCupcakeCatch);
 
 
-/* ✨ MAKE A WISH GAME */
-const makeWishCard = document.querySelector('.grid div:nth-child(3)');
+/* ✨ MAKE A WISH GAME — FIXED WITH SHOOTING STAR */
+const makeWishCard = document.getElementById('make-a-wish');
+
 makeWishCard.addEventListener('click', () => {
+  // confetti burst
   for (let i = 0; i < 5; i++) {
     confetti({
       particleCount: 20,
@@ -462,13 +482,79 @@ makeWishCard.addEventListener('click', () => {
       colors: ['#fff', '#fbcfe8', '#f472b6']
     });
   }
-  alert("✨ Make your wish, Sofia... and it will come true! ✨");
+
+  // shooting star reward
+  createShootingStar();
+
+  setTimeout(() => {
+    alert("✨ Close your eyes Kakoli… your wish is flying with the star! 🌠");
+  }, 500);
 });
+
+/* 🌠 SHOOTING STAR FUNCTION */
+function createShootingStar() {
+  const star = document.createElement('div');
+  star.classList.add('shooting-star');
+
+  // random starting position for variety
+  star.style.left = Math.random() * 100 + 'vw';
+
+  document.body.appendChild(star);
+
+  // remove after animation
+  setTimeout(() => star.remove(), 1600);
+}
 
 /* -------------------------------------------
    ICONS
 ------------------------------------------- */
 feather.replace();
+
+
+/* Start BGM when page loads */
+window.addEventListener('load', () => {
+  bgm.play().catch(e => {
+    // auto-play may be blocked; fallback to user action
+    console.log("BGM play blocked; will play on first user interaction.");
+  });
+  birthdayHornSfx.play().catch(e => { console.log("Horn play blocked"); });
+});
+
+/* -------------------------------------------
+   BALLOON POP SECTION
+------------------------------------------- */
+document.querySelectorAll('.balloon').forEach(balloon => {
+  balloon.addEventListener('click', function () {
+    balloonPopSfx.currentTime = 0;
+    balloonPopSfx.play();
+    
+    successChimeSfx.currentTime = 0;
+    successChimeSfx.play(); 
+
+    const wishText = this.getAttribute('data-wish');
+    const wishDisplay = document.getElementById('wish-display');
+    const textElement = wishDisplay.querySelector('p');
+
+    this.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+    this.style.transform = "scale(1.3)";
+    this.style.opacity = "0";
+
+    setTimeout(() => this.remove(), 300);
+
+    wishDisplay.classList.remove('hidden');
+    textElement.textContent = wishText;
+    textElement.classList.add("animate-fade-in-up");
+
+    confetti({
+      particleCount: 80,
+      spread: 80,
+      origin: { y: 0.7 },
+      colors: ['#f472b6', '#ec4899', '#f9a8d4', '#fbcfe8']
+    });
+  });
+});
+
+
 </script>
 
 </body>
