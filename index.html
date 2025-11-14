@@ -69,17 +69,15 @@ section {
 
 @keyframes shoot {
   0% {
-    transform: translate(-50vw, -20vh) scale(0.6);
-    opacity: 1;
-  }
-  70% {
+    transform: translate(0, 0) scale(1);
     opacity: 1;
   }
   100% {
-    transform: translate(50vw, 80vh) scale(0.2);
+    transform: translate(300px, 600px) scale(0.2);
     opacity: 0;
   }
 }
+
 
   </style>
 </head>
@@ -100,7 +98,7 @@ section {
       <p class="text-xl md:text-2xl text-pink-700 mb-8">
         Step into your dreamy world filled with sparkles, laughter, and endless smiles 💕
       </p>
-      <button class="bg-pink-400 text-white rounded-full px-8 py-3 hover:bg-pink-500 shadow-lg transition-all transform hover:scale-105">
+      <button id="celebrate-btn" class="bg-pink-400 text-white rounded-full px-8 py-3 hover:bg-pink-500 shadow-lg transition-all transform hover:scale-105">
         Let's Celebrate! ✨
       </button>
     </div>
@@ -290,23 +288,38 @@ balloonPopSfx.volume = 0.6;
 
 // new sound effects
 const successChimeSfx = new Audio("https://www.orangefreesounds.com/wp-content/uploads/2025/08/Success-chime-sound-effect.mp3");  // from source
-successChimeSfx.volume = 0.5;
+successChimeSfx.volume = 0.3;
 
-const partyPopperSfx = new Audio("https://sounddino.com/en/effects/party-popper/download/file/party-popper-sfx.mp3");  // from source
+const partyPopperSfx = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_ee0e76cda4.mp3");  // from source
 partyPopperSfx.volume = 0.6;
 
-const birthdayHornSfx = new Audio("https://freesoundslibrary.com/funny-birthday-horn.mp3");  // from source
+const birthdayHornSfx = new Audio("https://www.freesoundslibrary.com/wp-content/uploads/2020/08/funny-birthday-horn.mp3");  // from source
 birthdayHornSfx.volume = 0.6;
+
+
+let audioStarted = false;
+
+function startAllAudio() {
+  if (audioStarted) return;
+  audioStarted = true;
+
+  bgm.play().catch(()=>{});
+  birthdayHornSfx.play().catch(()=>{});
+}
+
+document.addEventListener("click", startAllAudio);
+document.addEventListener("touchstart", startAllAudio);
+document.addEventListener("scroll", startAllAudio);
+
 
 /* -------------------------------------------
    CELEBRATE BUTTON
 ------------------------------------------- */
-document.querySelector('button').addEventListener('click', () => {
-  window.scrollTo({
-    top: document.querySelector('#balloons').offsetTop,
-    behavior: 'smooth'
+document.getElementById('celebrate-btn')
+  .addEventListener('click', () => {
+    window.scrollTo({ top: document.querySelector('#balloons').offsetTop, behavior: 'smooth' });
   });
-});
+
 
 /* -------------------------------------------
    FINAL CONFETTI BUTTON
@@ -420,8 +433,7 @@ function startCupcakeCatch() {
         cupcakeRect.left + 15 >= basketRect.left &&
         cupcakeRect.left <= basketRect.right
       ) {
-        successChimeSfx.currentTime = 0;
-        successChimeSfx.play();
+        
         cupcakeScore++;
         confetti({
           particleCount: 15,
@@ -445,6 +457,8 @@ function startCupcakeCatch() {
   // Stop game after 15 seconds
   setTimeout(() => {
     clearInterval(gameInterval);
+    successChimeSfx.currentTime = 0;
+    successChimeSfx.play();
     alert(`🧁 You caught ${cupcakeScore} cupcakes, Kakoli! Sweet job! 🍰`);
   }, 15000);
 }
@@ -496,14 +510,13 @@ function createShootingStar() {
   const star = document.createElement('div');
   star.classList.add('shooting-star');
 
-  // random starting position for variety
-  star.style.left = Math.random() * 100 + 'vw';
+  star.style.top = (Math.random()*30) + "vh";      // somewhere top-left area
+  star.style.left = (Math.random()*30) + "vw";
 
   document.body.appendChild(star);
-
-  // remove after animation
-  setTimeout(() => star.remove(), 1600);
+  setTimeout(()=> star.remove(), 1500);
 }
+
 
 /* -------------------------------------------
    ICONS
