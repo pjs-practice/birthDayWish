@@ -136,14 +136,15 @@ section {
         <p class="text-sm text-pink-500">Reward: Sweet sparkles + heart shower 🍰</p>
       </div>
 
-      <div class="bg-white rounded-3xl p-6 shadow-xl transform hover:scale-105 transition-all">
-        <div class="bg-pink-100 rounded-2xl p-4 mb-4 text-center">
-          <span class="text-5xl">✨</span>
-        </div>
-        <h3 class="text-2xl font-bold text-pink-700 mb-2">Make a Wish</h3>
-        <p class="text-pink-600 mb-4">Tap the stars to light them up — make a wish at the end ✨</p>
-        <p class="text-sm text-pink-500">Reward: A glowing shooting star animation 🌠</p>
-      </div>
+      <div id="make-a-wish" class="bg-white rounded-3xl p-6 shadow-xl transform hover:scale-105 transition-all">
+  <div class="bg-pink-100 rounded-2xl p-4 mb-4 text-center">
+    <span class="text-5xl">✨</span>
+  </div>
+  <h3 class="text-2xl font-bold text-pink-700 mb-2">Make a Wish</h3>
+  <p class="text-pink-600 mb-4">Tap the stars to light them up — make a wish at the end ✨</p>
+  <p class="text-sm text-pink-500">Reward: A glowing shooting star animation 🌠</p>
+</div>
+
     </div>
   </section>
 
@@ -180,9 +181,14 @@ section {
   <custom-footer></custom-footer>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-  <script src="components/navbar.js">
-    class CustomNavbar extends HTMLElement {
+  <!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+<script>
+/* -------------------------------------------
+   NAVBAR
+------------------------------------------- */
+class CustomNavbar extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <nav class="fixed top-0 w-full bg-white/70 backdrop-blur-md shadow-md z-50">
@@ -200,23 +206,22 @@ section {
   }
 }
 customElements.define('custom-navbar', CustomNavbar);
-  </script>
-  <script src="components/floating-elements.js">
-    class FloatingElements extends HTMLElement {
+
+/* -------------------------------------------
+   FLOATING BACKGROUND ELEMENTS
+------------------------------------------- */
+class FloatingElements extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div class="absolute inset-0">
-          ${Array.from({ length: 15 }).map(() => `
-            <span class="floating-emoji text-pink-300 absolute text-3xl animate-float-slow">
-              ${['💖','🌸','✨','💕'][Math.floor(Math.random()*4)]}
-            </span>
-          `).join('')}
-        </div>
+        ${Array.from({ length: 15 }).map(() => `
+          <span class="floating-emoji text-pink-300 absolute text-3xl animate-float-slow">
+            ${['💖','🌸','✨','💕'][Math.floor(Math.random()*4)]}
+          </span>
+        `).join('')}
       </div>
     `;
 
-    // Randomize emoji positions
     this.querySelectorAll('.floating-emoji').forEach(el => {
       el.style.left = Math.random() * 100 + 'vw';
       el.style.top = Math.random() * 100 + 'vh';
@@ -225,12 +230,12 @@ customElements.define('custom-navbar', CustomNavbar);
     });
   }
 }
-
 customElements.define('floating-elements', FloatingElements);
-    
-  </script>
-  <script src="components/footer.js">
-    class CustomFooter extends HTMLElement {
+
+/* -------------------------------------------
+   FOOTER
+------------------------------------------- */
+class CustomFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <footer class="bg-gradient-to-r from-pink-200 via-pink-100 to-pink-200 py-8 text-center text-pink-700 relative overflow-hidden">
@@ -246,9 +251,12 @@ customElements.define('floating-elements', FloatingElements);
   }
 }
 customElements.define('custom-footer', CustomFooter);
-  </script>
-  <script src="script.js">
-    // --- BALLOON POP SECTION ---
+
+
+
+/* -------------------------------------------
+   BALLOON POP SECTION
+------------------------------------------- */
 document.querySelectorAll('.balloon').forEach(balloon => {
   balloon.addEventListener('click', function () {
     const wishText = this.getAttribute('data-wish');
@@ -277,7 +285,9 @@ document.querySelectorAll('.balloon').forEach(balloon => {
   });
 });
 
-// --- CELEBRATE BUTTON ---
+/* -------------------------------------------
+   CELEBRATE BUTTON
+------------------------------------------- */
 document.querySelector('button').addEventListener('click', () => {
   window.scrollTo({
     top: document.querySelector('#balloons').offsetTop,
@@ -285,7 +295,9 @@ document.querySelector('button').addEventListener('click', () => {
   });
 });
 
-// --- FINAL CONFETTI BUTTON ---
+/* -------------------------------------------
+   FINAL CONFETTI BUTTON
+------------------------------------------- */
 document.getElementById('confetti-btn').addEventListener('click', () => {
   const duration = 3 * 1000;
   const animationEnd = Date.now() + duration;
@@ -298,46 +310,166 @@ document.getElementById('confetti-btn').addEventListener('click', () => {
     confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
   }, 250);
 });
-    top: document.querySelector('section:nth-of-type(2)').offsetTop,
-    behavior: 'smooth'
-  });
-});
 
-// --- FINAL CONFETTI BUTTON ---
-document.getElementById('confetti-btn').addEventListener('click', () => {
-  const duration = 3 * 1000;
-  const animationEnd = Date.now() + duration;
-  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+/* -------------------------------------------
+   MINI GAMES INTERACTIONS
+------------------------------------------- */
 
-  const interval = setInterval(() => {
-    const timeLeft = animationEnd - Date.now();
+/* 🫧 BUBBLE POP GAME */
+const bubbleGame = document.querySelector('.grid div:nth-child(1)');
+bubbleGame.style.position = 'relative';
+bubbleGame.style.overflow = 'hidden';
+bubbleGame.addEventListener('click', () => startBubblePop());
 
-    if (timeLeft <= 0) {
-      return clearInterval(interval);
-    }
+function startBubblePop() {
+  for (let i = 0; i < 15; i++) {
+    const bubble = document.createElement('div');
+    bubble.className = 'absolute bg-pink-200 rounded-full';
+    bubble.style.width = `${20 + Math.random() * 40}px`;
+    bubble.style.height = bubble.style.width;
+    bubble.style.left = `${Math.random() * 90}%`;
+    bubble.style.bottom = '-50px';
+    bubble.style.opacity = 0.8;
+    bubble.style.transition = 'bottom 4s linear, opacity 1s ease';
 
-    const particleCount = 50 * (timeLeft / duration);
-    confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
-  }, 250);
-});
+    bubbleGame.appendChild(bubble);
 
-// --- STAR WISH GAME (Make a Wish section) ---
-const wishSection = document.querySelector('.text-5xl:contains("✨")');
-if (wishSection) {
-  wishSection.addEventListener('click', () => {
-    for (let i = 0; i < 5; i++) {
+    setTimeout(() => {
+      bubble.style.bottom = '200px';
+      setTimeout(() => bubble.remove(), 4000);
+    }, 50);
+
+    bubble.addEventListener('click', () => {
       confetti({
         particleCount: 10,
-        angle: 60 + i * 15,
-        spread: 55,
-        origin: { x: 0.5, y: 0.5 },
-        colors: ['#fff', '#fbcfe8', '#f472b6']
+        spread: 40,
+        origin: { y: 0.8 },
+        colors: ['#fbcfe8', '#f472b6', '#ec4899']
       });
-    }
-    alert("✨ Make your wish, Sofia... and it will come true! ✨");
-  });
+      bubble.remove();
+    });
+  }
 }
-  </script>
-  <script>feather.replace();</script>
+
+/* 🧁 CUPCAKE CATCH GAME — BASKET VERSION */
+const cupcakeGame = document.querySelector('.grid div:nth-child(2)');
+cupcakeGame.style.position = 'relative';
+cupcakeGame.style.overflow = 'hidden';
+cupcakeGame.style.height = '250px';
+cupcakeGame.style.border = '2px dashed #f472b6';
+cupcakeGame.style.borderRadius = '12px';
+cupcakeGame.style.background = 'linear-gradient(to bottom, #fff0f5, #ffe4f0)';
+
+let basket = document.createElement('div');
+basket.textContent = '🧺';
+basket.style.position = 'absolute';
+basket.style.bottom = '10px';
+basket.style.left = '50%';
+basket.style.fontSize = '2rem';
+basket.style.transform = 'translateX(-50%)';
+cupcakeGame.appendChild(basket);
+
+let basketPos = cupcakeGame.offsetWidth / 2 - 20; // initial basket position
+let cupcakeScore = 0;
+let cupcakes = [];
+let gameInterval;
+
+function startCupcakeCatch() {
+  cupcakeScore = 0;
+  cupcakes.forEach(c => c.remove());
+  cupcakes = [];
+
+  gameInterval = setInterval(() => {
+    // Spawn a new cupcake
+    const cupcake = document.createElement('div');
+    cupcake.textContent = '🧁';
+    cupcake.style.position = 'absolute';
+    cupcake.style.left = `${Math.random() * (cupcakeGame.offsetWidth - 30)}px`;
+    cupcake.style.top = '-30px';
+    cupcake.style.fontSize = '1.8rem';
+    cupcakeGame.appendChild(cupcake);
+    cupcakes.push(cupcake);
+
+    // Animate falling
+    let topPos = -30;
+    const fall = setInterval(() => {
+      topPos += 4;
+      cupcake.style.top = topPos + 'px';
+
+      // Check if cupcake hits the basket
+      const cupcakeRect = cupcake.getBoundingClientRect();
+      const basketRect = basket.getBoundingClientRect();
+      if (
+        cupcakeRect.bottom >= basketRect.top &&
+        cupcakeRect.left + 15 >= basketRect.left &&
+        cupcakeRect.left <= basketRect.right
+      ) {
+        cupcakeScore++;
+        confetti({
+          particleCount: 15,
+          spread: 60,
+          origin: { y: 0.8 },
+          colors: ['#fbcfe8', '#f472b6']
+        });
+        cupcake.remove();
+        clearInterval(fall);
+      }
+
+      // Remove if it falls off
+      if (topPos > cupcakeGame.offsetHeight) {
+        cupcake.remove();
+        clearInterval(fall);
+      }
+    }, 30);
+
+  }, 800);
+
+  // Stop game after 15 seconds
+  setTimeout(() => {
+    clearInterval(gameInterval);
+    alert(`🧁 You caught ${cupcakeScore} cupcakes, Sofia! Sweet job! 🍰`);
+  }, 15000);
+}
+
+// Move basket with mouse or touch
+cupcakeGame.addEventListener('mousemove', e => {
+  const rect = cupcakeGame.getBoundingClientRect();
+  basketPos = e.clientX - rect.left - 20;
+  if (basketPos < 0) basketPos = 0;
+  if (basketPos > cupcakeGame.offsetWidth - 40) basketPos = cupcakeGame.offsetWidth - 40;
+  basket.style.left = basketPos + 'px';
+});
+cupcakeGame.addEventListener('touchmove', e => {
+  const rect = cupcakeGame.getBoundingClientRect();
+  basketPos = e.touches[0].clientX - rect.left - 20;
+  if (basketPos < 0) basketPos = 0;
+  if (basketPos > cupcakeGame.offsetWidth - 40) basketPos = cupcakeGame.offsetWidth - 40;
+  basket.style.left = basketPos + 'px';
+});
+
+// Start game on click
+cupcakeGame.addEventListener('click', startCupcakeCatch);
+
+
+/* ✨ MAKE A WISH GAME */
+const makeWishCard = document.querySelector('.grid div:nth-child(3)');
+makeWishCard.addEventListener('click', () => {
+  for (let i = 0; i < 5; i++) {
+    confetti({
+      particleCount: 20,
+      spread: 70,
+      origin: { x: 0.5, y: 0.5 },
+      colors: ['#fff', '#fbcfe8', '#f472b6']
+    });
+  }
+  alert("✨ Make your wish, Sofia... and it will come true! ✨");
+});
+
+/* -------------------------------------------
+   ICONS
+------------------------------------------- */
+feather.replace();
+</script>
+
 </body>
 </html>
